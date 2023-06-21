@@ -1,0 +1,25 @@
+# "void babl_fatal"
+export BABL_PATH="${prefix}/lib/babl-0.1"
+
+# "Unrecognized image file format (gdk-pixbuf-error-quark, 3)"
+export XDG_DATA_DIRS="${prefix}/share:${XDG_DATA_DIRS}"
+
+# "GEGL operation missing!"
+export GEGL_PATH="${prefix}/lib/gegl-0.4"
+
+# "User installation failed!"
+export GIMP3_SYSCONFDIR="${prefix}/etc/gimp/2.99"
+export GIMP2_SYSCONFDIR="${prefix}/etc/gimp/2.0"
+
+# "There was an error parsing the menu definition"
+export GIMP3_DATADIR="${prefix}/share/gimp/2.99"
+export GIMP2_DATADIR="${prefix}/share/gimp/2.0"
+
+# No export plugins
+export GIMP3_PLUGINDIR="${prefix}/lib/gimp/2.99"
+export GIMP2_PLUGINDIR="${prefix}/lib/gimp/2.0"
+
+gimp_bin="$(ls "${prefix}/bin/gimp-2"*)"
+
+"${gimp_bin}" "$@"
+

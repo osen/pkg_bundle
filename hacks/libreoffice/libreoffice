@@ -1,0 +1,23 @@
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${prefix}/lib/libreoffice/program"
+export XDG_DATA_DIRS="${prefix}/share:${XDG_DATA_DIRS}"
+
+if [ ! "${LC_CTYPE}" ]; then
+  export LC_CTYPE="en_US.UTF-8"
+fi
+
+currdir="$(pwd)"
+args=
+filepath=
+
+for arg in "$@"; do
+  if [ -f "${arg}" ]; then
+    arg="$(cd "$(dirname "${arg}")" && pwd)/${arg}"
+    filepath="$arg"
+  else
+    args="$args $arg"
+  fi
+done
+
+currdir="$(pwd)"
+cd "${prefix}"
+"${prefix}/lib/libreoffice/program/soffice.bin" $args "$filepath"

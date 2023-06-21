@@ -1,0 +1,5 @@
+export BLENDER_SYSTEM_DATAFILES="${prefix}/share/blender/datafiles"
+export BLENDER_SYSTEM_SCRIPTS="${prefix}/share/blender/scripts"
+
+"${prefix}/bin/blender-bin" "$@"
+

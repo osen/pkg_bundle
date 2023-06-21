@@ -1,0 +1,22 @@
+# "ld.so: dia: can't load library 'libdia.so'"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${prefix}/lib/dia"
+
+# "Couldn't find standard objects when looking for object-libs"
+export DIA_LIB_PATH="${prefix}/lib/dia"
+
+# "ERROR:menus.c:932:menus_init: assertion failed"
+export DIA_BASE_PATH="${prefix}/share/dia"
+
+# "No valid configuration files found for the XSLT plugin, not loading"
+export DIA_XSLT_PATH="${prefix}/share/dia/xslt"
+
+# "No sheet named UML"
+export DIA_SHEET_PATH="${prefix}/share/dia/sheets"
+
+# Assorted shapes are missing
+export DIA_SHAPE_PATH="${prefix}/share/dia/shapes"
+
+# "failed to load icon for file"
+export XDG_DATA_DIRS="${prefix}/share:${XDG_DATA_DIRS}"
+
+dia "$@"

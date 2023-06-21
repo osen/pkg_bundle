@@ -1,0 +1,12 @@
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${prefix}/chrome"
+export LANG=en_US.UTF-8
+
+rm -f  "${HOME}/.config/chromium/SingletonLock"
+
+cd "${prefix}"
+
+#nowasm="--disable-features=WebAssembly,AsmJsToWebAssembly,WebAssemblyStreaming --js-flags=--noexpose-wasm"
+nowasm=
+
+"${prefix}/chrome/chrome" --disable-unveil ${nowasm} "$@"
+
