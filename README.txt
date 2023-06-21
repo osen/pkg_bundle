@@ -8,9 +8,9 @@ git (tested 2.40.0)
 
 Terrible Hack
 -------------
-blender (tested 3.0.1p1) - LD_LIBRARY_PATH ignored
-libreoffice (tested 7.5.1.2v0) - icu4c has ICU_DATA disabled
-chromium (tested 111.0.5563.110) - icu4c has ICU_DATA disabled
+blender (tested 3.0.1p1) - patch - LD_LIBRARY_PATH ignored in some libs
+libreoffice (tested 7.5.1.2v0) - patch - icu4c has ICU_DATA disabled
+chromium (tested 111.0.5563.110) - patch - icu4c has ICU_DATA disabled
 
 Partially working
 -----------------

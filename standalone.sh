@@ -48,8 +48,6 @@ verify_fetch_package()
 
   local full=
 
-  #ftp -o- "${installurl}/${version}/packages/${arch}/index.txt" | sed 's/^.* //g' | grep ".tgz$"
-
   local pkgs="$(ftp -o- "${installurl}/${version}/packages/${arch}/index.txt" \
     | sed 's/^.* //g' \
     | grep ".${suffix}$" \
@@ -81,15 +79,16 @@ fetch_package()
   local installurl="$(cat "/etc/installurl")"
   local version="$(uname -r)"
   local arch="$(uname -p)"
+  local suffix="tgz"
 
-  if [ -f "${package}/packages/${name}.tgz" ]; then
-    echo "[info] Package exists (${name}.tgz)"
+  if [ -f "${package}/packages/${name}.${suffix}" ]; then
+    echo "[info] Package exists (${name}.${suffix})"
     return
   fi
 
   while true; do
     set +e
-    ftp -o "${package}/packages/${name}.tgz" "${installurl}/${version}/packages/${arch}/${name}.tgz"
+    ftp -o "${package}/packages/${name}.${suffix}" "${installurl}/${version}/packages/${arch}/${name}.${suffix}"
     local rc=$?
     set -e
 
@@ -101,7 +100,7 @@ fetch_package()
     sleep 3
   done
 
-  local deps="$(pkg_info -f "${package}/packages/${name}.tgz" | grep '^@depend ' | sed 's/^.*://')"
+  local deps="$(pkg_info -f "${package}/packages/${name}.${suffix}" | grep '^@depend ' | sed 's/^.*://')"
 
   for dep in ${deps}; do
     fetch_package "${dep}"
@@ -162,11 +161,6 @@ post()
 }
 
 prep
-#verify_fetch_package "libreoffice-7.5.1.2v0"
-#verify_fetch_package "dia-0.97.3p9"
-#verify_fetch_package "gimp-2.99.14p0"
-#verify_fetch_package "vlc-3.0.18"
-#verify_fetch_package "blender-3.0.1p1"
 download
 extract
 wrappers
