@@ -1,3 +1,5 @@
+Current Target: 7.3 amd64
+
 Working
 -------
 dia (tested 0.97.3p9)

@@ -7,6 +7,7 @@
 #echo "disable" > /etc/firefox/unveil.main
 #echo "disable" > /etc/firefox/unveil.socket
 #echo "disable" > /etc/firefox/unveil.utility
+#echo "disable" > /etc/firefox/unveil.rdd
 
 cd "${prefix}"
 export GDK_PIXBUF_MODULE_FILE="lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"

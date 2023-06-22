@@ -8,9 +8,11 @@ cd "${prefix}"
 
 #nowasm="--disable-features=WebAssembly,AsmJsToWebAssembly,WebAssemblyStreaming --js-flags=--noexpose-wasm"
 nowasm=
+#nosandbox="--no-sandbox"
+nosandbox=
 
 if [ $argc -gt 0 ]; then
-  exec "${prefix}/chrome/chrome" --disable-unveil ${nowasm} "${argv[@]}"
+  exec "${prefix}/chrome/chrome" ${nosandbox} --disable-unveil ${nowasm} "${argv[@]}"
 else
-  exec "${prefix}/chrome/chrome" --disable-unveil ${nowasm}
+  exec "${prefix}/chrome/chrome" ${nosandbox} --disable-unveil ${nowasm}
 fi
