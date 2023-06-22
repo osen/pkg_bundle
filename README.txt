@@ -14,7 +14,7 @@ chromium (tested 111.0.5563.110) - patch - icu4c has ICU_DATA disabled
 
 Partially working
 -----------------
-none
+firefox (tested 111.0) - pledge - Requires manual tweaks, read start script
 
 # NOTES
 Scan libs using objdump instead of ldd or hardcoding (i.e blender)

@@ -1,0 +1,18 @@
+#echo "disable" > /etc/firefox/pledge.content
+#echo "disable" > /etc/firefox/pledge.main
+#echo "disable" > /etc/firefox/pledge.rdd
+#echo "disable" > /etc/firefox/pledge.socket
+#echo "disable" > /etc/firefox/pledge.utility
+#echo "disable" > /etc/firefox/unveil.content
+#echo "disable" > /etc/firefox/unveil.main
+#echo "disable" > /etc/firefox/unveil.socket
+#echo "disable" > /etc/firefox/unveil.utility
+
+cd "${prefix}"
+export GDK_PIXBUF_MODULE_FILE="lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+
+if [ $argc -gt 0 ]; then
+  exec "${prefix}/lib/firefox/firefox" "${argv[@]}"
+else
+  exec "${prefix}/lib/firefox/firefox"
+fi
