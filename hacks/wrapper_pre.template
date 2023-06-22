@@ -11,22 +11,19 @@ prefix="$(cd "$(dirname "$(realpath "$(which "$0")")")" && pwd)"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${prefix}/lib"
 export PATH="${prefix}/bin:${PATH}"
 
-pid=$$
-rundir="${HOME}/.cache/prog_${pid}"
+# Convert to absolute argument paths in case a change directory is required
+currdir="$(pwd)"
+argv=
+argc=0
 
-if [ -f "${prefix}/bin/gdk-pixbuf-query-loaders" ]; then
-  mkdir -p "${rundir}"
-  export GDK_PIXBUF_MODULE_FILE="${rundir}/gdk-pixbuf-loaders.cache"
-  export GDK_PIXBUF_MODULEDIR="${prefix}/lib/gdk-pixbuf-2.0/2.10.0/loaders"
-  "${prefix}/bin/gdk-pixbuf-query-loaders" --update-cache
-fi
+for arg in "${@}"; do
+  if [ -e "${arg}" ]; then
+    arg="${currdir}/${arg}"
+  fi
 
-if [ -f "${prefix}/bin/gtk-query-immodules-3.0" ]; then
-  mkdir -p "${rundir}"
-  export GTK_IM_MODULE_FILE="${rundir}/gtk-immodules.cache"
-  export GTK_PATH="${prefix}/lib/gtk-3.0"
-  "${prefix}/bin/gtk-query-immodules-3.0" --update-cache
-fi
+  argv[$argc]="${arg}"
+  argc=$((argc + 1))
+done
 
 ######################################
 ###### end wrapper_pre template ######

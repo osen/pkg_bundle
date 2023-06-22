@@ -14,8 +14,9 @@ chromium (tested 111.0.5563.110) - patch - icu4c has ICU_DATA disabled
 
 Partially working
 -----------------
+none
 
-
-# TODO
+# NOTES
 Scan libs using objdump instead of ldd or hardcoding (i.e blender)
 $ objdump -p libreoffice/bin/zstd | grep "  NEEDED"
+

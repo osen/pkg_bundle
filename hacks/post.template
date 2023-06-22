@@ -7,6 +7,7 @@
 set -e
 
 prefix="$(cd "$(dirname "$(realpath "$(which "$0")")")" && pwd)"
+currdir="$(pwd)"
 
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${prefix}/lib"
 export PATH="${prefix}/bin:${PATH}"
@@ -20,6 +21,31 @@ fi
 # "No GSettings schemas are installed on the system"
 if [ -f "${prefix}/bin/glib-compile-schemas" ]; then
   "${prefix}/bin/glib-compile-schemas" "${prefix}/share/glib-2.0/schemas"
+fi
+
+# Icons fail to load
+if [ -f "${prefix}/bin/gdk-pixbuf-query-loaders" ]; then
+  cd "${prefix}"
+  export GDK_PIXBUF_MODULE_FILE="lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+  export GDK_PIXBUF_MODULEDIR="lib/gdk-pixbuf-2.0/2.10.0/loaders"
+  "bin/gdk-pixbuf-query-loaders" --update-cache
+  cd "${currdir}"
+fi
+
+if [ -f "${prefix}/bin/gtk-query-immodules-2.0" ]; then
+  cd "${prefix}"
+  export GTK_IM_MODULE_FILE="lib/gtk-2.0/2.10.0/immodules.cache"
+  export GTK_PATH="lib/gtk-2.0"
+  "bin/gtk-query-immodules-2.0" --update-cache
+  cd "${currdir}"
+fi
+
+if [ -f "${prefix}/bin/gtk-query-immodules-3.0" ]; then
+  cd "${prefix}"
+  export GTK_IM_MODULE_FILE="lib/gtk-3.0/3.0.0/immodules.cache"
+  export GTK_PATH="lib/gtk-3.0"
+  "bin/gtk-query-immodules-3.0" --update-cache
+  cd "${currdir}"
 fi
 
 ###############################
