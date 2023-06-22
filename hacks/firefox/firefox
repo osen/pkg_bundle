@@ -1,14 +1,3 @@
-#echo "disable" > /etc/firefox/pledge.content
-#echo "disable" > /etc/firefox/pledge.main
-#echo "disable" > /etc/firefox/pledge.rdd
-#echo "disable" > /etc/firefox/pledge.socket
-#echo "disable" > /etc/firefox/pledge.utility
-#echo "disable" > /etc/firefox/unveil.content
-#echo "disable" > /etc/firefox/unveil.main
-#echo "disable" > /etc/firefox/unveil.socket
-#echo "disable" > /etc/firefox/unveil.utility
-#echo "disable" > /etc/firefox/unveil.rdd
-
 # "Unrecognized image file format (gdk-pixbuf-error-quark, 3)"
 export XDG_DATA_DIRS="${prefix}/share:${XDG_DATA_DIRS}"
 
