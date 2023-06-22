@@ -17,7 +17,10 @@ Partially working
 -----------------
 none
 
-# NOTES
-Scan libs using objdump instead of ldd or hardcoding (i.e blender)
+Notes
+-----
+# Scan libs using objdump instead of ldd or hardcoding (i.e blender)
 $ objdump -p libreoffice/bin/zstd | grep "  NEEDED"
 
+# Copy symlinks without preserving uid/gid
+$ cp -RP <source> <dest>
