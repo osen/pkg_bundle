@@ -9,6 +9,9 @@
 #echo "disable" > /etc/firefox/unveil.utility
 #echo "disable" > /etc/firefox/unveil.rdd
 
+# "Unrecognized image file format (gdk-pixbuf-error-quark, 3)"
+export XDG_DATA_DIRS="${prefix}/share:${XDG_DATA_DIRS}"
+
 cd "${prefix}"
 export GDK_PIXBUF_MODULE_FILE="lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
 

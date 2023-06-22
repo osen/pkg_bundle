@@ -1,6 +1,9 @@
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${prefix}/chrome"
 export LANG=en_US.UTF-8
 
+# "Unrecognized image file format (gdk-pixbuf-error-quark, 3)"
+export XDG_DATA_DIRS="${prefix}/share:${XDG_DATA_DIRS}"
+
 rm -f  "${HOME}/.config/chromium/SingletonLock"
 
 # For icu
