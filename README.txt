@@ -81,6 +81,22 @@ to work.
 - vlc (tested 3.0.18)
 - wpa_supplicant (tested 2.9p2)
 
+Pledge and Unveil
+-------------------------------------------------------------------
+
+Pledge and Unveil offer great functionality in terms of security.
+Due to a tendancy to rely on absolute paths, this conflicts with
+the idea of creating bundles that can pe placed anywhere on the
+filesystem. This currently mostly relates to web browsers.
+
+- Firefox browser, the binary is patched to use a relative
+  path to i.e pledge.main and unveil.main within the bundle directory
+  itself. However the user needs to manually edit these files to
+  specify absolute paths whenever the bundle is moved.
+
+- Chromium browser, pledge / sandbox remains functional but
+  unfortunately unveil is disabled.
+
 Notes / TODO / Misc
 -------------------------------------------------------------------
 

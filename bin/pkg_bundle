@@ -11,13 +11,6 @@ packages="$@"
 
 prefix="$(cd "$(dirname "$(realpath "$(which "$0")")")" && cd .. && pwd)"
 share="${prefix}/share/pkg_bundle"
-version="$(uname -r)"
-
-if [ "${version}" != "7.3" ]; then
-  echo "Error: Unsupported version (${version})"
-
-  exit 1
-fi
 
 prep()
 {
@@ -164,6 +157,18 @@ post()
   rm "${package}/post_install"
 }
 
+check_version()
+{
+  local version="$(uname -r)"
+
+  if [ "${version}" != "7.3" ]; then
+    echo "Error: Unsupported version (${version})"
+
+    exit 1
+  fi
+}
+
+check_version
 prep
 download
 extract
