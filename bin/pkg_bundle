@@ -161,7 +161,7 @@ post()
   echo "[hack] Running post script (${script})"
   chmod +x "${package}/post_install"
   "${package}/post_install"
-  #rm "${package}/post_install"
+  rm "${package}/post_install"
 }
 
 prep
