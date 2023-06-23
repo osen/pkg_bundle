@@ -1,11 +1,6 @@
 # "Unrecognized image file format (gdk-pixbuf-error-quark, 3)"
 export XDG_DATA_DIRS="${prefix}/share:${XDG_DATA_DIRS}"
 
-cd "${prefix}"
 export GDK_PIXBUF_MODULE_FILE="lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
 
-if [ $argc -gt 0 ]; then
-  exec "${prefix}/lib/firefox/firefox" "${argv[@]}"
-else
-  exec "${prefix}/lib/firefox/firefox"
-fi
+cd_exec "${prefix}/lib/firefox/firefox" "${@}"

@@ -5,11 +5,6 @@ if [ ! "${LC_CTYPE}" ]; then
   export LC_CTYPE="en_US.UTF-8"
 fi
 
-# For icu
-cd "${prefix}"
+#cd_exec "${prefix}/lib/libreoffice/program/soffice.bin" "${@}"
+cd_exec "${prefix}/lib/libreoffice/program/oosplash" "${@}"
 
-if [ $argc -gt 0 ]; then
-  exec "${prefix}/lib/libreoffice/program/soffice.bin" "${argv[@]}"
-else
-  exec "${prefix}/lib/libreoffice/program/soffice.bin"
-fi

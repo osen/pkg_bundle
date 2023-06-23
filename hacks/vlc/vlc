@@ -6,7 +6,5 @@ export VLC_PLUGIN_PATH="${prefix}/lib/vlc/plugins"
 
 export XDG_DATA_DIRS="${prefix}/share:${XDG_DATA_DIRS}"
 
-#"${prefix}/lib/vlc/vlc-cache-gen" "${prefix}/lib/vlc/plugins"
-
 "${prefix}/bin/vlc" "$@"
 

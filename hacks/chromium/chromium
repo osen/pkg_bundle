@@ -6,16 +6,9 @@ export XDG_DATA_DIRS="${prefix}/share:${XDG_DATA_DIRS}"
 
 rm -f  "${HOME}/.config/chromium/SingletonLock"
 
-# For icu
-cd "${prefix}"
-
 #nowasm="--disable-features=WebAssembly,AsmJsToWebAssembly,WebAssemblyStreaming --js-flags=--noexpose-wasm"
 nowasm=
 #nosandbox="--no-sandbox"
 nosandbox=
 
-if [ $argc -gt 0 ]; then
-  exec "${prefix}/chrome/chrome" ${nosandbox} --disable-unveil ${nowasm} "${argv[@]}"
-else
-  exec "${prefix}/chrome/chrome" ${nosandbox} --disable-unveil ${nowasm}
-fi
+cd_exec "${prefix}/chrome/chrome" ${nosandbox} --disable-unveil ${nowasm} "${@}"

@@ -20,14 +20,9 @@ export GIMP3_PLUGINDIR="${prefix}/lib/gimp/2.99"
 export GIMP2_PLUGINDIR="${prefix}/lib/gimp/2.0"
 
 # Icons fail to load
-cd "${prefix}"
 export GDK_PIXBUF_MODULE_FILE="lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
 #export GTK_IM_MODULE_FILE="lib/gtk-3.0/3.0.0/immodules.cache"
 
 gimp_bin="$(ls "${prefix}/bin/gimp-2"*)"
 
-if [ $argc -gt 0 ]; then
-  exec "${gimp_bin}" "${argv[@]}"
-else
-  exec "${gimp_bin}"
-fi
+cd_exec "${gimp_bin}" "${@}"

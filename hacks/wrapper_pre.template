@@ -6,24 +6,36 @@
 
 set -e
 
+cd_exec()
+{
+  # Convert to absolute paths in case a change directory is required
+  local currdir="$(pwd)"
+  local argv=
+  local argc=0
+
+  for arg in "${@}"; do
+    if [ -e "${arg}" ]; then
+      local absarg="${currdir}/${arg}"
+
+      # Commit only if not already an absolute path
+      if [ -e "${absarg}" ]; then
+        arg="${absarg}"
+      fi
+    fi
+
+    argv[$argc]="${arg}"
+    argc=$((argc + 1))
+  done
+
+  cd "${prefix}"
+
+  exec "${argv[@]}"
+}
+
 prefix="$(cd "$(dirname "$(realpath "$(which "$0")")")" && pwd)"
 
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${prefix}/lib"
 export PATH="${prefix}/bin:${PATH}"
-
-# Convert to absolute argument paths in case a change directory is required
-currdir="$(pwd)"
-argv=
-argc=0
-
-for arg in "${@}"; do
-  if [ -e "${arg}" ]; then
-    arg="${currdir}/${arg}"
-  fi
-
-  argv[$argc]="${arg}"
-  argc=$((argc + 1))
-done
 
 ######################################
 ###### end wrapper_pre template ######

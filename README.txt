@@ -24,3 +24,7 @@ $ objdump -p libreoffice/bin/zstd | grep "  NEEDED"
 
 # Copy symlinks without preserving uid/gid
 $ cp -RP <source> <dest>
+
+# export GDK_PIXBUF_MODULE_FILE="lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+# dia, this can be absolute?
+# firefox

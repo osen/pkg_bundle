@@ -20,12 +20,7 @@ export DIA_SHAPE_PATH="${prefix}/share/dia/shapes"
 export XDG_DATA_DIRS="${prefix}/share:${XDG_DATA_DIRS}"
 
 # GdkPixbuf-WARNING, GLib-GObject-CRITICAL
-cd "${prefix}"
 export GDK_PIXBUF_MODULE_FILE="lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
 
-if [ $argc -gt 0 ]; then
-  exec "${prefix}/bin/dia" "${argv[@]}"
-else
-  exec "${prefix}/bin/dia"
-fi
+cd_exec "${prefix}/bin/dia" "${@}"
 
