@@ -1,7 +1,7 @@
 set -e
 
 if [ -z "$1" ]; then
-  echo "No package specified"
+  echo "Usage: $0 <package>"
 
   exit 1
 fi
@@ -9,16 +9,20 @@ fi
 package="$1"
 packages="$@"
 
-# Shell script
-prefix="$(cd "$(dirname "$0")" && pwd)"
+prefix="$(cd "$(dirname "$(realpath "$(which "$0")")")" && cd .. && pwd)"
+share="${prefix}/share/pkg_bundle"
+version="$(uname -r)"
 
-# Executable shell script
-#prefix="$(cd "$(dirname "$(realpath "$(which "$0")")")" && pwd)"
+if [ "${version}" != "7.3" ]; then
+  echo "Error: Unsupported version (${version})"
+
+  exit 1
+fi
 
 prep()
 {
-  if [ -f "${prefix}/hacks/${package}/additional.list" ]; then
-    local additional="$(cat "${prefix}/hacks/${package}/additional.list")"
+  if [ -f "${share}/${package}/additional.list" ]; then
+    local additional="$(cat "${share}/${package}/additional.list")"
     packages="${packages} ${additional}"
     echo "[hack] Including additional packages (${additional})"
   fi
@@ -124,31 +128,31 @@ extract()
 
 wrappers()
 {
-  if [ -d "${prefix}/hacks/${package}" ]; then
-    local files="$(cd "${prefix}/hacks/${package}" && ls | grep -v \.list$ | grep -v \.sh$)"
+  if [ -d "${share}/${package}" ]; then
+    local files="$(cd "${share}/${package}" && ls | grep -v \.list$ | grep -v \.sh$)"
 
     for file in ${files}; do
       echo "[hack] Adding wrapper script (${file})"
-      cat "${prefix}/hacks/wrapper_pre.template" > "${package}/${file}"
-      cat "${prefix}/hacks/${package}/${file}" >> "${package}/${file}"
-      cat "${prefix}/hacks/wrapper_post.template" >> "${package}/${file}"
+      cat "${share}/wrapper_pre.template" > "${package}/${file}"
+      cat "${share}/${package}/${file}" >> "${package}/${file}"
+      cat "${share}/wrapper_post.template" >> "${package}/${file}"
       chmod +x "${package}/${file}"
     done
   else
     echo "[hack] Adding wrapper script (${package})"
-    cat "${prefix}/hacks/wrapper_pre.template" > "${package}/${package}"
+    cat "${share}/wrapper_pre.template" > "${package}/${package}"
     echo "exec ${package} " '"$@"' >> "${package}/${package}"
-    cat "${prefix}/hacks/wrapper_post.template" >> "${package}/${package}"
+    cat "${share}/wrapper_post.template" >> "${package}/${package}"
     chmod +x "${package}/${package}"
   fi
 }
 
 post()
 {
-  local script="${prefix}/hacks/${package}/post.sh"
+  local script="${share}/${package}/post.sh"
 
-  cat "${prefix}/hacks/post.template" > "${package}/post_install"
-  echo "standalone_prefix=\"${prefix}\"" >> "${package}/post_install"
+  cat "${share}/post.template" > "${package}/post_install"
+  echo "pkg_bundle_share=\"${share}\"" >> "${package}/post_install"
 
   if [ -f "${script}" ]; then
     cat "${script}" >> "${package}/post_install"
@@ -157,7 +161,7 @@ post()
   echo "[hack] Running post script (${script})"
   chmod +x "${package}/post_install"
   "${package}/post_install"
-  rm "${package}/post_install"
+  #rm "${package}/post_install"
 }
 
 prep

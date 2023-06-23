@@ -1,8 +1,8 @@
 cd "${prefix}"
-cc -opatch-icu "${standalone_prefix}/hacks/patch-icu.c"
+cc -opatch-icu "${pkg_bundle_share}/patch-icu.c"
 ./patch-icu
 
-cc -opatch-unveil "${standalone_prefix}/hacks/patch-unveil.c"
+cc -opatch-unveil "${pkg_bundle_share}/patch-unveil.c"
 ./patch-unveil
 
 mkdir etc/firefox
