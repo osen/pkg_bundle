@@ -78,6 +78,7 @@ to work.
 - gimp (tested 2.99.14p0)
 - git (tested 2.40.0)
 - libreoffice (tested 7.5.1.2v0) - patch - icu4c has ICU_DATA disabled
+- texlive_texmf-full (tested 2022)
 - vlc (tested 3.0.18)
 - wpa_supplicant (tested 2.9p2)
 

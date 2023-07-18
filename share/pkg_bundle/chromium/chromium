@@ -4,7 +4,7 @@ export LANG=en_US.UTF-8
 # "Unrecognized image file format (gdk-pixbuf-error-quark, 3)"
 export XDG_DATA_DIRS="${prefix}/share:${XDG_DATA_DIRS}"
 
-rm -f  "${HOME}/.config/chromium/SingletonLock"
+rm -f "${HOME}/.config/chromium/SingletonLock"
 
 #nowasm="--disable-features=WebAssembly,AsmJsToWebAssembly,WebAssemblyStreaming --js-flags=--noexpose-wasm"
 nowasm=

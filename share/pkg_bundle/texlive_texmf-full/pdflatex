@@ -1,0 +1,8 @@
+export PERL5LIB="${PERL5LIB}:${prefix}/share/texmf-dist/scripts/texlive"
+export PERL5LIB="${PERL5LIB}:${prefix}/libdata/perl5/site_perl"
+
+export TEXMFSYSVAR="${prefix}/share/texmf-var"
+export TEXMFDIST="${prefix}/share/texmf-dist"
+
+exec "pdflatex" "$@"
+
