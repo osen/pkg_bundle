@@ -132,9 +132,9 @@ wrappers()
       chmod +x "${package}/${file}"
     done
   else
-    echo "[hack] Adding wrapper script (${package})"
+    echo "[hack] Adding default wrapper script (${package})"
     cat "${share}/wrapper_pre.template" > "${package}/${package}"
-    echo "exec ${package} " '"$@"' >> "${package}/${package}"
+    echo "exec ${package}" '"$@"' >> "${package}/${package}"
     cat "${share}/wrapper_post.template" >> "${package}/${package}"
     chmod +x "${package}/${package}"
   fi
