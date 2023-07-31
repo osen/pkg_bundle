@@ -7,17 +7,18 @@ if [ -z "$1" ]; then
 fi
 
 package="$1"
-packages="$@"
+packages=
 
 prefix="$(cd "$(dirname "$(realpath "$(which "$0")")")" && cd .. && pwd)"
 share="${prefix}/share/pkg_bundle"
 
 prep()
 {
-  if [ -f "${share}/${package}/additional.list" ]; then
-    local additional="$(cat "${share}/${package}/additional.list")"
-    packages="${packages} ${additional}"
-    echo "[hack] Including additional packages (${additional})"
+  if [ -f "${share}/${package}/packages.list" ]; then
+    packages="$(cat "${share}/${package}/packages.list")"
+    echo "[hack] Selecting packages (${packages})"
+  else
+    packages="${package}"
   fi
 
   #mkdir "${package}"
