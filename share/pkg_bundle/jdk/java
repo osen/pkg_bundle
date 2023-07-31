@@ -1,3 +1,4 @@
-export PATH="${prefix}/jdk-1.8.0/bin:${PATH}"
+jdk_dir="$(echo "${prefix}/jdk-"*)"
+export PATH="${jdk_dir}/bin:${PATH}"
 
 exec java "$@"

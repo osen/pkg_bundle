@@ -51,13 +51,17 @@ verify_fetch_package()
     | grep ".${suffix}$" \
     | grep "^${name}-" \
     | sed "s/\.${suffix}//g" \
-    | sort -r)"
+    | sed "s/^${name}-//" \
+    | sort -n -r \
+    | sed "s/^/${name}-/")"
 
   for pkg in ${pkgs}; do
     local trunk="$(echo $pkg | sed 's/-[0-9].*$//g')"
 
     if [ "${trunk}" = "${name}" ]; then
       full="${pkg}"
+
+      break
     fi
   done
 
