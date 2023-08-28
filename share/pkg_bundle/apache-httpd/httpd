@@ -1,13 +1,4 @@
 export HTTPD_PREFIX="${prefix}"
+export WWW_PREFIX="${HOME}/www"
 
-exec httpd2 -D FOREGROUND -d "${HOME}/www" -f httpd.conf "$@"
-
-#######################################
-##### begin wrapper_post template #####
-#######################################
-
-
-
-#######################################
-###### end wrapper_post template ######
-#######################################
+exec httpd2 -D FOREGROUND -d "${WWW_PREFIX}" -f httpd.conf "$@"

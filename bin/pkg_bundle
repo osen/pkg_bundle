@@ -130,6 +130,10 @@ wrappers()
     local files="$(cd "${share}/${package}" && ls | grep -v \.list$ | grep -v \.sh$)"
 
     for file in ${files}; do
+      if [ -d "${share}/${package}/${file}" ]; then
+        continue
+      fi
+
       echo "[hack] Adding wrapper script (${file})"
       cat "${share}/wrapper_pre.template" > "${package}/${file}"
       cat "${share}/${package}/${file}" >> "${package}/${file}"
@@ -149,17 +153,17 @@ post()
 {
   local script="${share}/${package}/post.sh"
 
-  cat "${share}/post.template" > "${package}/post_install"
-  echo "pkg_bundle_share=\"${share}\"" >> "${package}/post_install"
+  cat "${share}/post.template" > "${package}/postinstall.sh"
+  echo "pkg_bundle_share=\"${share}\"" >> "${package}/postinstall.sh"
 
   if [ -f "${script}" ]; then
-    cat "${script}" >> "${package}/post_install"
+    echo "[hack] Adding custom post script (${script})"
+    cat "${script}" >> "${package}/postinstall.sh"
   fi
 
-  echo "[hack] Running post script (${script})"
-  chmod +x "${package}/post_install"
-  "${package}/post_install"
-  rm "${package}/post_install"
+  echo "[hack] Running post script (${package}/postinstall.sh)"
+  sh "${package}/postinstall.sh"
+  rm "${package}/postinstall.sh"
 }
 
 check_version()

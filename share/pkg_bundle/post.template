@@ -6,7 +6,7 @@
 
 set -e
 
-prefix="$(cd "$(dirname "$(realpath "$(which "$0")")")" && pwd)"
+prefix="$(cd "$(dirname "$(realpath "$0")")" && pwd)"
 currdir="$(pwd)"
 
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${prefix}/lib"
