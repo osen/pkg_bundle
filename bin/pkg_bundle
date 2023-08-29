@@ -151,6 +151,13 @@ wrappers()
 
 post()
 {
+  local overlay="${share}/${package}/overlay"
+
+  if [ -d "${overlay}" ]; then
+    echo "[hack] Copying overlay (${overlay})"
+    cp -R "${overlay}/"* "${package}"
+  fi
+
   local script="${share}/${package}/post.sh"
 
   cat "${share}/post.template" > "${package}/postinstall.sh"

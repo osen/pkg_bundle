@@ -1,4 +1,10 @@
 export HTTPD_PREFIX="${prefix}"
 export WWW_PREFIX="${HOME}/www"
 
+if [ ! -d "${WWW_PREFIX}" ]; then
+  cp -R "${prefix}/skel" "${WWW_PREFIX}"
+  mkdir "${WWW_PREFIX}/logs"
+  cp "${prefix}/share/examples/apache2/conf/mime.types" "${WWW_PREFIX}"
+fi
+
 exec httpd2 -D FOREGROUND -d "${WWW_PREFIX}" -f httpd.conf "$@"
