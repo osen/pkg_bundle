@@ -5,6 +5,15 @@ if [ ! -d "${WWW_PREFIX}" ]; then
   cp -R "${prefix}/skel" "${WWW_PREFIX}"
   mkdir "${WWW_PREFIX}/logs"
   cp "${prefix}/share/examples/apache2/conf/mime.types" "${WWW_PREFIX}"
+
+  mkdir "${WWW_PREFIX}/ssl"
+
+  openssl req -newkey rsa:2048 -nodes \
+    -keyout "${WWW_PREFIX}/ssl/key.pem" -x509 -days 365 \
+    -out "${WWW_PREFIX}/ssl/certificate.pem" \
+    -subj '/CN=localhost'
+
+  cat "${WWW_PREFIX}/ssl/certificate.pem" "${WWW_PREFIX}/ssl/key.pem" > "${WWW_PREFIX}/ssl/chain.pem"
 fi
 
 exec httpd2 -D FOREGROUND -d "${WWW_PREFIX}" -f httpd.conf "$@"
