@@ -1,0 +1,5 @@
+export GIT_EXEC_PATH="${prefix}/libexec/git"
+export GIT_TEMPLATE_DIR="${prefix}/share/git-core/templates"
+
+exec git "$@"
+
